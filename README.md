@@ -692,41 +692,72 @@ robot.travailler() // Affiche : Robot travaille...
 ```
 
 
-Astuce : La délégation, c’est comme demander à un collègue de faire une partie de votre travail.
+AVoici une version **améliorée et formatée** de la section sur `lazy` et `Delegates.observable`, avec des titres clairs, un affichage de code propre, et des explications structurées :
 
-**lazy**
+---
 
-Explications :
-**lazy** retarde la création d’une propriété jusqu’à ce qu’elle soit utilisée.
-Utile pour les objets lourds (ex. : charger une grande image).
+## 🔁 Délégation en Kotlin : `by`, `lazy`, et `Delegates.observable`
 
+### 🧠 Astuce générale :
 
-Exemple pour débutants :**val** donnees: String by **lazy** {
+> La délégation, c’est comme **demander à un collègue** de faire une partie de votre travail à votre place. Kotlin permet de déléguer certaines fonctionnalités à d’autres objets ou mécanismes intégrés.
+
+---
+
+### 💤 `lazy` – Initialisation paresseuse
+
+#### 📘 Explication :
+
+* `lazy` retarde l'initialisation d'une **propriété** jusqu'à ce qu'elle soit utilisée pour la première fois.
+* Très utile pour les **objets coûteux** à charger, comme une grande image, des données depuis une base ou une API.
+
+#### ✅ Exemple :
+
+```kotlin
+val donnees: String by lazy {
     println("Chargement des données...")
     "Données prêtes !"
 }
-println("Avant d’utiliser les données")
-println(donnees) // Affiche : Chargement des données... puis Données prêtes !
-println(donnees) // Affiche : Données prêtes ! (sans recharger)
 
+fun main() {
+    println("Avant d’utiliser les données")
+    println(donnees) // Affiche : Chargement des données... puis Données prêtes !
+    println(donnees) // Affiche : Données prêtes ! (sans recharger)
+}
+```
 
-Astuce : **lazy** économise du temps et des ressources.
+💡 **Astuce** : `lazy` économise **temps et ressources** en évitant des calculs inutiles tant que ce n’est pas nécessaire.
 
-**Delegates.observable**
+---
 
-Explications :
-Permet de surveiller les changements d’une propriété et de réagir à chaque modification.
-Nécessite import kotlin.properties.Delegates.
+### 👀 `Delegates.observable` – Surveiller les changements
 
+#### 📘 Explication :
 
-Exemple pour débutants :import kotlin.properties.Delegates
+* `Delegates.observable` permet de **réagir automatiquement** quand la valeur d'une propriété change.
+* Nécessite `import kotlin.properties.Delegates`.
+
+#### ✅ Exemple :
+
 ```kotlin
-**var** argent: Int by **Delegates.observable**(100) { prop, ancien, nouveau ->
+import kotlin.properties.Delegates
+
+var argent: Int by Delegates.observable(100) { prop, ancien, nouveau ->
     println("L’argent est passé de $ancien à $nouveau")
 }
-argent = 150 // Affiche : L’argent est passé de 100 à 150
-argent = 200 // Affiche : L’argent est passé de 150 à 200
+
+fun main() {
+    argent = 150  // Affiche : L’argent est passé de 100 à 150
+    argent = 200  // Affiche : L’argent est passé de 150 à 200
+}
 ```
+
+💡 **Astuce** : `observable` est parfait pour **suivre l’évolution d’un état** (score, position, montant...) et **agir automatiquement** en conséquence.
+
+---
+
+Souhaites-tu que j’intègre cette version à ton fichier Markdown complet ?
+
 
 
 Astuce : Utilisez observable pour suivre les changements, comme un journal de bord.
