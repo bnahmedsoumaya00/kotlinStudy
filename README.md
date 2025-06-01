@@ -230,4 +230,4 @@ println("Main : Je peux maintenant quitter.")
 
 ---
 
-> 📝 Ce résumé couvre l'essentiel pour bien comprendre les bases de Kotlin et des coroutines pour ton examen.
+
