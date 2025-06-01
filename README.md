@@ -742,5 +742,3 @@ Délégation : Utilisez by, **lazy**, et **Delegates.observable** pour un code e
 
 
 
-# 📝 Ce résumé, enrichi pour les débutants, contient tout ce qu’il faut pour réussir vos TD et examens en Kotlin. Les explications sont basées sur la documentation officielle (https://kotlinlang.org/) pour garantir leur précision et leur clarté.
-
