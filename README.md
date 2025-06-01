@@ -1,58 +1,93 @@
 # 📘 Résumé ultra-complet – Bases de Kotlin + Coroutines + Concepts du TD
-Ce document est conçu pour les débutants en Kotlin. Il couvre les bases, les coroutines, et les concepts essentiels pour réussir vos TD et examens, avec des explications simples, des analogies du quotidien, et des exemples pratiques basés sur la documentation officielle de Kotlin (https://kotlinlang.org/).
+
+Ce document est conçu pour les **débutants en Kotlin**. Il couvre :
+
+- Les **bases du langage Kotlin**,
+- Les **coroutines** (programmation asynchrone),
+- Et les **concepts essentiels** à maîtriser pour réussir vos TD et examens.
+
+Les explications sont simples, avec des analogies du quotidien et des exemples pratiques, en s’appuyant sur la [documentation officielle de Kotlin](https://kotlinlang.org/).
+
+---
+
 # 🧱 Bases de Kotlin
+
 ## 1. Déclaration de package et importations
+
+```kotlin
 package mon.package
-```kotlin
-```kotlin
 import kotlin.math.*
 ```
+
+### 🧠 Explications :
+
+- **`package`** : comme un **dossier** dans votre ordinateur, il organise vos fichiers (classes, fonctions…).
+- **`import`** : comme **emprunter un outil** dans une bibliothèque — ici, des fonctions comme `sqrt()` ou `max()`.
+
+### ✅ Exemple :
+
+```kotlin
+import kotlin.math.sqrt
+
+fun main() {
+    println(sqrt(16.0)) // Affiche : 4.0
+}
 ```
 
+🗒️ *Ici, `sqrt` calcule la racine carrée. On l’importe pour pouvoir l’utiliser directement.*
 
-
-Qu’est-ce qu’un package ? Un package, c’est comme un dossier dans votre ordinateur : il organise vos fichiers (classes et fonctions) pour éviter les confusions. Par exemple, mon.package regroupe votre code.
-À quoi sert import ? C’est comme emprunter un livre dans une bibliothèque : vous pouvez utiliser des outils (comme max ou sqrt de kotlin.math) sans les recréer.
-Exemple pour débutants :import kotlin.math.sqrt
-println(sqrt(16.0)) // Affiche : 4.0
-
-Ici, sqrt calcule la racine carrée, et nous l’importons pour l’utiliser facilement.
-
+---
 
 ## 2. Fonctions
+
 ```kotlin
-**fun** somme(a: Int, b: Int): Int {
+fun somme(a: Int, b: Int): Int {
     return a + b
 }
-```kotlin
-**fun** sommeRapide(a: Int, b: Int) = a + b
+
+fun sommeRapide(a: Int, b: Int) = a + b
 ```
 
+### 🧠 Explications :
 
-Explications :
-Une fonction, c’est comme une recette : elle prend des ingrédients (paramètres), fait quelque chose, et donne un résultat.
+Une fonction, c’est comme une **recette** :
+
+- Elle prend des **ingrédients** (paramètres),
+- Fait une **opération** (le corps),
+- Et **renvoie un résultat**.
+
+Détails :
+
+- `fun` : mot-clé pour déclarer une fonction,
+- `(a: Int, b: Int)` : paramètres typés (ici, des entiers),
+- `: Int` : type de retour (ici, un entier),
+- `sommeRapide` : version simplifiée sans `return`.
+
+### ✅ Exemple :
+
 ```kotlin
-**fun** : mot-clé pour créer une fonction.
-(a: Int, b: Int) : les paramètres (comme des ingrédients) avec leur type (Int pour des nombres entiers).
-: Int : indique que le résultat est un entier.
-sommeRapide : version courte où le résultat est donné directement sans return.
-```
-
-
-Exemple pour débutants :**fun** direBonjour(prenom: String): String {
+fun direBonjour(prenom: String): String {
     return "Salut, $prenom !"
 }
-println(direBonjour("Emma")) // Affiche : Salut, Emma !
-// Version courte
-```kotlin
-**fun** direSalut(prenom: String) = "Salut, $prenom !"
-println(direSalut("Léo")) // Affiche : Salut, Léo !
+
+fun main() {
+    println(direBonjour("Emma")) // Affiche : Salut, Emma !
+}
 ```
 
+Version courte :
 
-Astuce : Utilisez la version courte (=) pour des fonctions simples.
+```kotlin
+fun direSalut(prenom: String) = "Salut, $prenom !"
 
+fun main() {
+    println(direSalut("Léo")) // Affiche : Salut, Léo !
+}
+```
 
+💡 **Astuce** : Utilisez la syntaxe courte (`=`) pour les fonctions simples, cela rend le code plus lisible !
+
+---
 ## 3. Variables
 ```kotlin
 **val** pi = 3.14
