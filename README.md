@@ -1,231 +1,163 @@
 
-# 📘 Résumé – Bases de Kotlin & Coroutines
-## 🧱 Bases de Kotlin
+# 📘 Résumé complet – Kotlin de base + Coroutines + Préparation au TD
 
-### 1. Déclaration de package et importations
+## 🔹 1. Bases de Kotlin
 
+### 🧱 Déclaration de package et importations
 ```kotlin
 package mon.package
 import kotlin.math.*
 ```
+- `package` : organisation logique du code.
+- `import` : permet d'utiliser des fonctions ou classes externes.
 
-- `package` : organise les classes et fonctions en espaces de noms.
-- `import` : permet d'utiliser des classes ou fonctions d'autres packages sans avoir à spécifier leur nom complet.
-
----
-
-### 2. Fonctions
-
+### 🧱 Fonctions
 ```kotlin
 fun somme(a: Int, b: Int): Int {
     return a + b
 }
+fun sommeRapide(a: Int, b: Int) = a + b
 ```
+- `fun` : mot-clé pour déclarer une fonction.
+- `=` : fonction à expression unique.
 
-- `fun` : déclare une fonction.
-- `(a: Int, b: Int)` : paramètres avec leurs types.
-- `: Int` : type de retour.
-- `return` : mot-clé pour retourner une valeur.
-
-**Fonction à expression unique :**
-
+### 🧱 Variables
 ```kotlin
-fun somme(a: Int, b: Int) = a + b
+val x = 10      // constante
+var y = 5       // variable mutable
 ```
 
----
-
-### 3. Variables
-
-- `val` : valeur immuable (constante).
-- `var` : variable mutable.
-
-```kotlin
-val pi = 3.14
-var compteur = 0
-compteur += 1
-```
-
----
-
-### 4. Modèles de chaînes (String Templates)
-
+### 🧱 Chaînes et templates
 ```kotlin
 val nom = "Kotlin"
-println("Bonjour, $nom!")
-println("Longueur du nom : ${nom.length}")
+println("Bonjour $nom, longueur = ${nom.length}")
 ```
 
-- `$nom` : insère la variable dans la chaîne.
-- `${expression}` : insère le résultat d'une expression.
-
----
-
-### 5. Expressions conditionnelles
-
+### 🧱 Null Safety
 ```kotlin
-val max = if (a > b) a else b
+var nom: String? = "Alice"
+println(nom?.length ?: 0)
 ```
 
-- `if` peut être utilisé comme expression.
-
----
-
-### 6. Sécurité des nulls
-
-```kotlin
-var nom: String = "Kotlin"
-nom = null // Erreur
-
-var nomNullable: String? = "Kotlin"
-nomNullable = null // OK
-
-println(nomNullable?.length)
-```
-
-- `?` : type nullable.
-- `?.` : appel sécurisé, évite les NullPointerException.
-
----
-
-### 7. Classes et objets
-
+### 🧱 Classes et objets
 ```kotlin
 class Personne(val nom: String, var age: Int)
-val personne = Personne("Alice", 30)
 ```
 
-- `val` dans le constructeur = propriété en lecture seule.
-- `var` = modifiable.
-
----
-
-### 8. Collections
-
+### 🧱 Collections
 ```kotlin
-val nombres = listOf(1, 2, 3) // Liste immuable
-val nombresMutables = mutableListOf(1, 2, 3) // Liste mutable
-
-for (nombre in nombres) {
-    println(nombre)
-}
+val liste = listOf(1, 2, 3)
+val listeMutable = mutableListOf(4, 5)
 ```
 
 ---
 
-## ⚙️ Bases des Coroutines
+## 🔹 2. Coroutines Kotlin
 
-Les coroutines permettent d'exécuter du code asynchrone de manière non bloquante.
-
----
-
-### 1. Lancement d'une coroutine
-
+### ⚙️ Concepts de base
 ```kotlin
 import kotlinx.coroutines.*
 
 fun main() = runBlocking {
     launch {
         delay(1000L)
-        println("Monde!")
+        println("Coroutines Kotlin")
     }
-    println("Bonjour,")
+    println("Début")
 }
 ```
 
-- `runBlocking` : démarre une coroutine bloquante.
-- `launch` : démarre une coroutine sans retour de valeur.
-- `delay` : suspend l'exécution sans bloquer.
-
----
-
-### 2. Fonctions suspendues
-
+### ⚙️ Fonctions suspendues
 ```kotlin
-suspend fun faireQuelqueChose() {
-    delay(1000L)
-    println("Fait!")
+suspend fun attendre() {
+    delay(500L)
 }
 ```
 
-- `suspend` : fonction pouvant être suspendue dans une coroutine.
-
----
-
-### 3. Constructeurs de coroutine
-
-- `launch` : sans valeur de retour.
-
+### ⚙️ async / await
 ```kotlin
-launch {
-    // ...
-}
-```
-
-- `async` : retourne un résultat différé (Deferred).
-
-```kotlin
-val resultat = async {
-    5 + 3
-}
+val resultat = async { 5 + 3 }
 println(resultat.await())
 ```
 
+### ⚙️ Concurrence structurée
+- `coroutineScope` garantit que toutes les coroutines internes sont terminées.
+
 ---
 
-### 4. Concurrence structurée
+## 🔹 3. Concepts spécifiques au TD
 
+### ✅ Enum
 ```kotlin
-fun main() = runBlocking {
-    launch {
-        delay(1000L)
-        println("Tâche depuis runBlocking")
-    }
+enum class Statut {
+    EN_ATTENTE, EN_COURS, TERMINEE, ANNULEE
+}
+```
 
-    coroutineScope {
-        launch {
-            delay(500L)
-            println("Tâche depuis coroutineScope")
+### ✅ Sealed class et sous-classes
+```kotlin
+sealed class Tache {
+    data class Simple(val description: String) : Tache()
+    data class AvecPriorite(val description: String, val priorite: Int) : Tache()
+    data class Deleguee(val description: String, val responsable: String) : Tache()
+}
+```
+
+### ✅ object pour utilitaire
+```kotlin
+object TrieurDeTaches {
+    fun trierParDescription(taches: List<Tache>) = taches.sortedBy {
+        when (it) {
+            is Tache.Simple -> it.description
+            is Tache.AvecPriorite -> it.description
+            is Tache.Deleguee -> it.description
         }
-
-        delay(100L)
-        println("Coroutine scope terminé")
     }
-
-    println("Programme terminé")
 }
 ```
 
-- `coroutineScope` : attend la fin de toutes les coroutines enfants.
-
----
-
-### 5. Annulation de coroutines
-
+### ✅ Fonctions comme paramètres et retours
 ```kotlin
-val job = launch {
-    repeat(1000) { i ->
-        println("Job : Je dors $i ...")
-        delay(500L)
+fun appliquerFiltre(taches: List<Tache>, filtre: (Tache) -> Boolean): List<Tache> {
+    return taches.filter(filtre)
+}
+
+fun genererRapport(taches: List<Tache>): (Statut) -> List<String> {
+    return { statut -> 
+        taches.mapNotNull {
+            val desc = when (it) {
+                is Tache.Simple -> it.description
+                is Tache.AvecPriorite -> it.description
+                is Tache.Deleguee -> it.description
+            }
+            if (desc.contains(statut.name.lowercase(), ignoreCase = true)) desc else null
+        }
     }
 }
-delay(1300L)
-println("Main : J'en ai assez d'attendre!")
-job.cancelAndJoin()
-println("Main : Je peux maintenant quitter.")
 ```
 
-- `cancelAndJoin()` : annule la coroutine et attend sa fin.
+### ✅ Lambda, collections, map/filter/etc.
+```kotlin
+val livres = mutableListOf(
+    Livre("Titre1", "Auteur1", 2001),
+    Livre("Titre2", "Auteur2", 1995)
+)
+val apres2000 = livres.filter { it.anneePublication > 2000 }
+```
 
 ---
 
-## 📌 À retenir pour l'examen
+## 📌 Ce que tu dois savoir faire pour réussir le TD
 
-- Syntaxe `fun`, `val`, `var`, `if`, `when`, `for`, `class`.
-- Types : `String`, `Int`, `Boolean`, `List`, `MutableList`, `Map`, `Nullable` (`?`).
-- Fonctions suspendues et `runBlocking`, `launch`, `async`, `await`, `delay`.
-- Sécurité des nulls avec `?.`, `!!`, `?:`.
-- Structure des classes et collections.
+- Utiliser `enum class`, `sealed class`, `object`, `data class`.
+- Comprendre la différence entre `val` et `var`.
+- Utiliser des fonctions comme arguments ou retours (`(T) -> Boolean`).
+- Savoir trier, filtrer, transformer des collections (`map`, `filter`, `sortedBy`, etc.).
+- Manipuler des `List`, `Set`, `Map`.
+- Utiliser des lambdas (`{ it > 0 }`) et des expressions `when`.
+- Connaître les fonctions `find`, `any`, `all`, `count`, `associateBy`, `groupBy`, `partition`.
+- Comprendre les concepts de délégation (`by`), lazy, et observable.
+- Être capable d'écrire un programme structuré, modulaire et lisible.
 
 ---
 
