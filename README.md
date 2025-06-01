@@ -732,13 +732,5 @@ argent = 200 // Affiche : L’argent est passé de 150 à 200
 Astuce : Utilisez observable pour suivre les changements, comme un journal de bord.
 
 
-# 📌 À retenir pour l’examen et le TD
-
-Concepts clés : Comprenez **enum**, **sealed** **class**, data **class**, **object**, lambda.
-Collections : Maîtrisez **filter**, **map**, sortedBy, **groupBy**, **partition** pour organiser des données.
-Coroutines : Apprenez **suspend**, **launch**, **async**, et **runBlocking** pour les tâches asynchrones.
-Fonctions d’ordre supérieur : Créez des fonctions flexibles avec des lambdas.
-Délégation : Utilisez by, **lazy**, et **Delegates.observable** pour un code efficace.
-
 
 
