@@ -1,6 +1,5 @@
 
-# 📘 Résumé – Bases de Kotlin & Coroutines (en français)
-
+# 📘 Résumé – Bases de Kotlin & Coroutines
 ## 🧱 Bases de Kotlin
 
 ### 1. Déclaration de package et importations
