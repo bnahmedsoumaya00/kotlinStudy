@@ -4,8 +4,11 @@ Ce document est conçu pour les débutants en Kotlin. Il couvre les bases, les c
 ## 1. Déclaration de package et importations
 package mon.package
 ```kotlin
+```kotlin
 import kotlin.math.*
 ```
+```
+
 
 
 Qu’est-ce qu’un package ? Un package, c’est comme un dossier dans votre ordinateur : il organise vos fichiers (classes et fonctions) pour éviter les confusions. Par exemple, mon.package regroupe votre code.
@@ -208,8 +211,11 @@ Astuce : Utilisez mutableListOf si vous devez modifier la liste, sinon listOf.
 Les coroutines permettent de gérer des tâches longues (comme charger une image depuis Internet) sans bloquer votre programme. Elles rendent le code asynchrone simple à lire.
 ## 1. Lancement d'une coroutine
 ```kotlin
+```kotlin
 import kotlinx.coroutines.*
 ```
+```
+
 
 ```kotlin
 **fun** main() = **runBlocking** {
